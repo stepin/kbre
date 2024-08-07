@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+cd "$(dirname "$0")"
+set -eEuo pipefail
+
+cd ..
+
+set -a
+[[ -f .env ]] && source .env
+set +a
+
+./build/bin/macosArm64/releaseExecutable/kbre.kexe "$@"

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+cd "$(dirname "$0")"
+set -eEuo pipefail
+
+cp ../build/bin/macosArm64/debugExecutable/kbre.kexe ~/.bin/kbre

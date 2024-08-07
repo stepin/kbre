@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+set -eEuo pipefail
+cd "$(dirname "$0")"
+
+cd ..
+
+VERSION=$(git describe --tags --always)
+IMAGE_LATEST="stepin/kbre"
+IMAGE="$IMAGE_LATEST:$VERSION"
+
+cp build.gradle.kts build.gradle.kts.orig
+sed "s/1.0-SNAPSHOT/$VERSION/g" build.gradle.kts.orig > build.gradle.kts
+
+cp src/nativeMain/kotlin/name/stepin/cli/VersionCmd.kt src/nativeMain/kotlin/name/stepin/cli/VersionCmd.kt.orig
+sed "s/SNAPSHOT/$VERSION/g" src/nativeMain/kotlin/name/stepin/cli/VersionCmd.kt.orig > src/nativeMain/kotlin/name/stepin/cli/VersionCmd.kt
+
+./gradlew build
+
+rm -rf ./dist || true
+mkdir ./dist
+
+mkdir ./dist/linuxX64
+cp LICENSE README.md ./dist/linuxX64/
+cp build/bin/linuxX64/releaseExecutable/kbre.kexe ./dist/linuxX64/kbre
+pushd ./dist/linuxX64
+zip -9 ../kbre-linuxX64.zip *
+popd
+
+mkdir ./dist/linuxArm64
+cp LICENSE README.md ./dist/linuxArm64/
+cp build/bin/linuxArm64/releaseExecutable/kbre.kexe ./dist/linuxArm64/kbre
+pushd ./dist/linuxArm64
+zip -9 ../kbre-linuxArm64.zip *
+popd
+
+mkdir ./dist/macosX64
+cp LICENSE README.md ./dist/macosX64/
+cp build/bin/macosX64/releaseExecutable/kbre.kexe ./dist/macosX64/kbre
+pushd ./dist/macosX64
+zip -9 ../kbre-macosX64.zip *
+popd
+
+mkdir ./dist/macosArm64
+cp LICENSE README.md ./dist/macosArm64/
+cp build/bin/macosArm64/releaseExecutable/kbre.kexe ./dist/macosArm64/kbre
+pushd ./dist/macosArm64
+zip -9 ../kbre-macosArm64.zip *
+popd
+
+[[ ! -h build/bin/linux-amd64 ]] && ln -sn linuxX64 build/bin/linux-amd64
+[[ ! -h build/bin/linux-arm64 ]] && ln -sn linuxArm64 build/bin/linux-arm64
+docker buildx create --use
+docker buildx build --push --platform linux/amd64,linux/arm64 -f Dockerfile.embed . -t "$IMAGE" -t "$IMAGE_LATEST"
+
+./bin/update-local-installation

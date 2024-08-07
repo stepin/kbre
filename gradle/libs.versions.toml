@@ -1,0 +1,20 @@
+[versions]
+kotlin = "2.0.0"
+ktlintGradle = "12.1.1"
+sonar = "5.1.0.4882"
+taskTree = "4.0.0"
+clikt = "4.4.0"
+kotlinxSerialization = "2.0.0"
+yamlkt = "0.13.0"
+okio = "3.9.0"
+
+[libraries]
+clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
+yamlkt = { module = "net.mamoe.yamlkt:yamlkt", version.ref = "yamlkt" }
+okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
+
+[plugins]
+sonar = { id = "org.sonarqube", version.ref = "sonar" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradle" }
+task-tree = { id = "com.dorongold.task-tree", version.ref = "taskTree" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinxSerialization" }

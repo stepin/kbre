@@ -1,0 +1,5 @@
+group: name.stepin
+artifact: git-parse-commits2
+description: Provides next release version and release notes from git commit messages.
+preset: script
+type: root

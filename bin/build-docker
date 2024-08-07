@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -eEuo pipefail
+cd "$(dirname "$0")"
+set -x
+
+cd ..
+
+VERSION=$(git describe --tags --always)
+IMAGE_LATEST="stepin/kbre"
+IMAGE="$IMAGE_LATEST:$VERSION"
+
+# NOTE: Kotlin Native is not available for Linux ARM, only for macOS ARM. Missing file:
+# https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-native-prebuilt/2.0.0/kotlin-native-prebuilt-2.0.0-linux-aarch64.tar.gz
+docker build --platform linux/amd64 . -t "$IMAGE" -t "$IMAGE_LATEST"

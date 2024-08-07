@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+cd "$(dirname "$0")"
+set -xeEuo pipefail
+
+docker run --rm -i \
+  -v $PWD:/data \
+  -w /data \
+  --user "$(id -u)" \
+  stepin/kbre "$@"

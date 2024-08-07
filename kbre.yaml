@@ -1,0 +1,15 @@
+group: name.stepin
+artifact: kbre
+name: Kotlin Build Rules Enforcer
+description: Automates generation and update of Gradle config files in JS/Python way.
+preset: cli
+type: root
+extensions:
+    - serialization
+    - yaml
+    - files
+variables:
+  SONAR_HOST_URL: "http://localhost:9000"
+  SONAR_PROJECT_KEY: kbre
+  SONAR_PROJECT_NAME: kbre
+  SONAR_TOKEN: sqp_821b1d3209761625bdd29259674237d429bce626

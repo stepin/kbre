@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eEuo pipefail
+cd "$(dirname "$0")"
+set -x
+
+cd ..
+
+VERSION=$(git describe --tags --always)
+IMAGE_LATEST="stepin/kbre"
+IMAGE="$IMAGE_LATEST:$VERSION"
+
+docker build --platform linux/amd64,linux/arm64 -f Dockerfile.embed . -t "$IMAGE" -t "$IMAGE_LATEST"

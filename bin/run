@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+cd "$(dirname "$0")"
+set -eEuo pipefail
+
+cd ..
+
+set -a
+[[ -f .env ]] && source .env
+set +a
+
+rm -rf ./tmp || true
+mkdir ./tmp
+
+./build/bin/macosArm64/debugExecutable/kbre.kexe \
+  --verbose \
+  update --target-path ./tmp \
+  --templates-path /Users/stepin/my/opensource/kbre-default-config \
+  --config ./kbre.yaml
