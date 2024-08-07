@@ -24,6 +24,19 @@ cd ~
 git clone https://github.com/stepin/kbre-default-config .krbe
 ```
 
+Installation using Brew:
+```shell
+brew install stepin/tools/kbre
+```
+
+Installation using Docker:
+```shell
+alias kbre='docker run --rm -it -v $PWD:/data -w /data --user "$(id -u)" stepin/kbre'
+kbre version
+```
+
+Binaries can be downloaded from GitHub Release page: https://github.com/stepin/kbre/releases
+
 Create new Spring app:
 ```shell
 mkdir my-app
@@ -52,9 +65,6 @@ variables:
   SONAR_PROJECT_NAME: kotlin-bootstrap-app
   SONAR_TOKEN: sqp_821b1d3209761625bdd29259674237d429bce626
 EOF
-
-alias kbre='docker run --rm -it -v $PWD:/data -w /data --user "$(id -u)" stepin/kbre'
-kbre version
 
 kbre new
 ```
