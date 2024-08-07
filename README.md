@@ -82,6 +82,7 @@ special meaning for following files:
 - `imports.kts` -- it will be added to `%IMPORTS%` variable
 - `plugins.kts` -- it will be added to `%PLUGINS%` variable
 - `deps.kts` -- it will be added to `%DEPS%` variable
+- `buildDeps.kts` -- it will be added to `%BUILD_DEPS%` variable (buildscript dependencies)
 - `body.kts` -- it will be added to `%BODY%` variable
 
 `Variable` is key/value. They are defined in kbre.yaml file and there are some pre-defined variable. In addition

@@ -96,6 +96,10 @@ class UpdateCmd :
         "--deps",
         help = "Project-specific deps",
     )
+    private val buildDeps by option(
+        "--build-deps",
+        help = "Project-specific buildscript deps",
+    )
     private val body by option(
         "-b",
         "--body",
@@ -136,6 +140,7 @@ class UpdateCmd :
                     imports = imports ?: file.imports,
                     plugins = plugins ?: file.plugins,
                     deps = deps ?: file.deps,
+                    buildDeps = buildDeps,
                     body = body ?: file.body,
                     verbose = globalOptions.verbose,
                 )
@@ -156,6 +161,7 @@ class UpdateCmd :
                     imports = imports,
                     plugins = plugins,
                     deps = deps,
+                    buildDeps = buildDeps,
                     body = body,
                     verbose = globalOptions.verbose,
                 )

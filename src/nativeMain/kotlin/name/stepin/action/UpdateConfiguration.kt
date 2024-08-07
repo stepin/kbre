@@ -18,6 +18,7 @@ data class UpdateConfiguration(
     val imports: String?,
     val plugins: String?,
     val deps: String?,
+    val buildDeps: String?,
     val body: String?,
     val verbose: Boolean,
 )

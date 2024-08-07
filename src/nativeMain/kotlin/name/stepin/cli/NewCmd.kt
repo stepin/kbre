@@ -90,6 +90,10 @@ class NewCmd :
         "--deps",
         help = "Project-specific deps",
     )
+    private val buildDeps by option(
+        "--build-deps",
+        help = "Project-specific buildscript deps",
+    )
     private val body by option(
         "-b",
         "--body",
@@ -127,6 +131,7 @@ class NewCmd :
                     imports = imports ?: file.imports,
                     plugins = plugins ?: file.plugins,
                     deps = deps ?: file.deps,
+                    buildDeps = buildDeps,
                     body = body ?: file.body,
                     verbose = globalOptions.verbose,
                 )
@@ -147,6 +152,7 @@ class NewCmd :
                     imports = imports,
                     plugins = plugins,
                     deps = deps,
+                    buildDeps = buildDeps,
                     body = body,
                     verbose = globalOptions.verbose,
                 )

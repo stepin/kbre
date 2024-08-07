@@ -73,6 +73,7 @@ class UpdateAction {
             imports = configuration.imports,
             plugins = configuration.plugins,
             deps = configuration.deps,
+            buildDeps = configuration.buildDeps,
             body = configuration.body,
             extra = emptyMap(),
         )
@@ -90,6 +91,10 @@ class UpdateAction {
                 extensions
                     .filter { it.deps != null }
                     .joinToString(separator = "\n") { getContent(it.deps ?: "", variables) },
+            "BUILD_DEPS" to
+                extensions
+                    .filter { it.deps != null }
+                    .joinToString(separator = "\n") { getContent(it.buildDeps ?: "", variables) },
             "IMPORTS" to
                 extensions
                     .filter { it.imports != null }

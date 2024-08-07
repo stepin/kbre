@@ -11,6 +11,7 @@ data class Extension(
     val imports: String?,
     val plugins: String?,
     val deps: String?,
+    val buildDeps: String?,
     val body: String?,
     val extra: Map<WriteTarget, Path>,
 ) {
@@ -21,6 +22,7 @@ data class Extension(
                 "imports.kts",
                 "plugins.kts",
                 "deps.kts",
+                "buildDeps.kts",
                 "body.kts",
             )
 
@@ -50,6 +52,7 @@ data class Extension(
                 imports = loadIfExists(path, "imports.kts"),
                 plugins = loadIfExists(path, "plugins.kts"),
                 deps = loadIfExists(path, "deps.kts"),
+                buildDeps = loadIfExists(path, "buildDeps.kts"),
                 body = loadIfExists(path, "body.kts"),
                 extra = extra + newExtra,
             )
