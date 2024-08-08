@@ -4,4 +4,4 @@ set -xeEuo pipefail
 
 cd ..
 
-./gradlew macosArm64Binaries
+./gradlew linkDebugExecutableMacosArm64

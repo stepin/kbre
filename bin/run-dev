@@ -8,4 +8,4 @@ set -a
 [[ -f .env ]] && source .env
 set +a
 
-./build/bin/macosArm64/releaseExecutable/kbre.kexe "$@"
+./build/bin/macosArm64/debugExecutable/kbre.kexe "$@"
