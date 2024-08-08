@@ -1,4 +1,4 @@
-package name.stepin.action
+package name.stepin.action.update
 
 import okio.Path
 

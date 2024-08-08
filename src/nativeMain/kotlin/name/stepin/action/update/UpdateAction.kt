@@ -1,6 +1,6 @@
-package name.stepin.action
+package name.stepin.action.update
 
-import name.stepin.action.FilesGenerator.Companion.getContent
+import name.stepin.action.update.FilesGenerator.Companion.getContent
 import name.stepin.utils.FileUtils.listRecursively
 import name.stepin.utils.FileUtils.load
 import name.stepin.utils.Logger

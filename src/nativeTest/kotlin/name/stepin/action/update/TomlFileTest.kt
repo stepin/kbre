@@ -1,4 +1,4 @@
-package name.stepin.action
+package name.stepin.action.update
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

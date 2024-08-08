@@ -1,4 +1,4 @@
-package name.stepin.action
+package name.stepin.action.update
 
 import name.stepin.utils.FileUtils.listRecursively
 import name.stepin.utils.FileUtils.loadIfExists

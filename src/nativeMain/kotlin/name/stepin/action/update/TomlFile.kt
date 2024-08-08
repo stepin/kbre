@@ -1,4 +1,4 @@
-package name.stepin.action
+package name.stepin.action.update
 
 /**
  * Format of libs.versions.toml file is quite complex.

@@ -6,8 +6,8 @@ import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.multiple
 import com.github.ajalt.clikt.parameters.options.option
-import name.stepin.action.UpdateAction
-import name.stepin.action.UpdateConfiguration
+import name.stepin.action.update.UpdateAction
+import name.stepin.action.update.UpdateConfiguration
 import name.stepin.config.ConfigFile
 import name.stepin.utils.FileUtils.checkIfExists
 import name.stepin.utils.FileUtils.workingDir
