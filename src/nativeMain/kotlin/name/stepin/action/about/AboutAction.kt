@@ -12,6 +12,7 @@ class AboutAction {
         t.println(blue("Version: $version"))
         t.println()
         t.println(green("Kbre is a project generator and updater for Gradle and other tools."))
+        t.println(green("It's useful if there are more than 1 project."))
         t.println(green("See ${blue("https://github.com/stepin/kbre")} for more information."))
     }
 }

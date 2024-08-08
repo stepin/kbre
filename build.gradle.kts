@@ -21,6 +21,8 @@ dependencies {
     commonMainImplementation(libs.yamlkt)
 
     commonMainImplementation(libs.okio)
+
+    commonMainImplementation(libs.mordant)
 }
 
 kotlin {

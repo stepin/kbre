@@ -1,6 +1,7 @@
 package name.stepin.config
 
 import kotlinx.serialization.Serializable
+import name.stepin.utils.FileUtils
 import name.stepin.utils.FileUtils.load
 import net.mamoe.yamlkt.Yaml
 import okio.Path
@@ -19,6 +20,7 @@ data class ConfigFile(
     val imports: String? = null,
     val plugins: String? = null,
     val deps: String? = null,
+    val buildDeps: String? = null,
     val body: String? = null,
 ) {
     companion object {
@@ -27,5 +29,13 @@ data class ConfigFile(
 
             return Yaml.decodeFromString(serializer(), fileContent)
         }
+    }
+
+    override fun toString(): String {
+        return Yaml.encodeToString(serializer(), this)
+    }
+
+    fun write(path: Path) {
+        FileUtils.write(path, this.toString())
     }
 }

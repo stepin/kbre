@@ -8,6 +8,7 @@ import okio.Path.Companion.toPath
 
 object FileUtils {
     fun workingDir(filename: String?): Path {
+        log("workingDir $filename")
         if (filename == null) {
             return cwd()
         }
@@ -55,6 +56,14 @@ object FileUtils {
                 val filename = it.relativeTo(path).toString()
                 val permissions = getPermissions(it)
                 WriteTarget(filename, permissions) to path / it
+            }
+    }
+
+    fun listDirs(path: Path): List<String> {
+        return FileSystem.SYSTEM.list(path)
+            .filter { FileSystem.SYSTEM.metadata(it).isDirectory }
+            .map {
+                it.relativeTo(path).toString()
             }
     }
 
