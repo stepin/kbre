@@ -131,7 +131,7 @@ class NewCmd :
                     imports = imports ?: file.imports,
                     plugins = plugins ?: file.plugins,
                     deps = deps ?: file.deps,
-                    buildDeps = buildDeps,
+                    buildDeps = buildDeps ?: file.buildDeps,
                     body = body ?: file.body,
                     verbose = globalOptions.verbose,
                 )
