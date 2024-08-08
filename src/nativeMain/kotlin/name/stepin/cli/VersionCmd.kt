@@ -7,8 +7,11 @@ class VersionCmd :
         name = "version",
         help = "Prints version of this tool",
     ) {
+    companion object {
+        const val VERSION = "SNAPSHOT"
+    }
+
     override fun run() {
-        val version = "SNAPSHOT"
-        println(version)
+        println(VERSION)
     }
 }

@@ -1,6 +1,7 @@
 package name.stepin
 
 import com.github.ajalt.clikt.core.subcommands
+import name.stepin.cli.AboutCmd
 import name.stepin.cli.Cli
 import name.stepin.cli.NewCmd
 import name.stepin.cli.UpdateCmd
@@ -12,5 +13,6 @@ fun main(args: Array<String>) {
             VersionCmd(),
             NewCmd(),
             UpdateCmd(),
+            AboutCmd(),
         ).main(args)
 }
