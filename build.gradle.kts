@@ -29,33 +29,7 @@ kotlin {
     macosX64().binaries.executable { entryPoint = "name.stepin.main" }
     macosArm64().binaries.executable { entryPoint = "name.stepin.main" }
 
-//    val hostOs = System.getProperty("os.name")
-//    val hostOsArch = System.getProperty("os.arch")
-//    val isMingwX64 = hostOs.startsWith("Windows")
-//    val nativeTarget =
-//        if (hostOs == "Mac OS X") {
-//            if (hostOsArch == "aarch64") {
-//                macosArm64("native")
-//            } else {
-//                macosX64("native")
-//            }
-//        } else if (hostOs == "Linux") {
-//            linuxX64("native")
-//        } else if (isMingwX64) {
-//            mingwX64("native")
-//        } else {
-//            throw RuntimeException("Host OS is not supported in Kotlin/Native.")
-//        }
-//    nativeTarget.binaries.executable { entryPoint = "name.stepin.main" }
-
     applyDefaultHierarchyTemplate()
-
-//    sourceSets {
-//        nativeMain {
-//        }
-//        nativeTest {
-//        }
-//    }
 }
 
 sonar {
