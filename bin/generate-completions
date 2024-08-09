@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eEuo pipefail
+cd "$(dirname "$0")"
+
+cd ..
+
+./bin/build-native
+
+cd build/bin/native/releaseExecutable/
+_KBRE_COMPLETE=zsh ./kbre > ./kbre.zsh
+_KBRE_COMPLETE=bash ./kbre > ./kbre.bash
+_KBRE_COMPLETE=fish ./kbre > ./kbre.fish
