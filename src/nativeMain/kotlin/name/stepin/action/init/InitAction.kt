@@ -110,7 +110,7 @@ class InitAction {
         val generate = YesNoPrompt("Do you confirm generation?", t).ask()
         if (generate == true) {
             configFile.write(cmd.configPath)
-            t.info("Now you can generate files using ${green("kbre new")} command.")
+            t.info("✨  Done. Now ${green("kbre new")} can be used to generate files.")
         } else {
             t.println()
             t.danger("Aborted.")
