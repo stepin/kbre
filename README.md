@@ -2,8 +2,8 @@
 
 Kbre automates generation and update of project files for Gradle and other tools.
 
-➡️ See https://stepin.github.io/kbre for documentation on [installation](https://stepin.github.io/kbre/installation/),
-[configuration](https://stepin.github.io/kbre/configDirFormat/), and [commands](https://stepin.github.io/kbre/usage/).
+➡️ See https://kbre.stepin.name/ for documentation on [installation](https://kbre.stepin.name/installation/),
+[configuration](https://kbre.stepin.name/configDirFormat/), and [commands](https://kbre.stepin.name/usage/).
 
 ## Status
 
