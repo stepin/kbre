@@ -11,10 +11,10 @@ import name.stepin.cli.VersionCmd
 fun main(args: Array<String>) {
     Cli()
         .subcommands(
-            VersionCmd(),
+            InitCmd(),
             NewCmd(),
             UpdateCmd(),
             AboutCmd(),
-            InitCmd(),
+            VersionCmd(),
         ).main(args)
 }
