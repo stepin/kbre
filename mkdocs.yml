@@ -1,0 +1,65 @@
+site_name: KBRE
+repo_name: kbre
+repo_url: https://github.com/stepin/kbre
+site_description: "Automates generation and update of project files for Gradle and other tools."
+site_author: Igor Stepin
+remote_branch: gh-pages
+
+copyright: 'Copyright &copy; 2024 Igor Stepin'
+
+theme:
+    name: 'material'
+    logo: img/chair-logo.png
+    favicon: img/chair-logo-64.png
+    icon:
+        repo: fontawesome/brands/github
+    palette:
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+          primary: indigo
+          accent: indigo
+          toggle:
+              icon: material/brightness-7
+              name: Switch to dark mode
+
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          primary: indigo
+          accent: indigo
+          toggle:
+              icon: material/brightness-4
+              name: Switch to light mode
+
+extra_css:
+    - css/custom.css
+
+markdown_extensions:
+    - smarty
+    - codehilite:
+          guess_lang: false
+    - footnotes
+    - meta
+    - toc:
+          permalink: true
+    - admonition
+    - pymdownx.betterem:
+          smart_enable: all
+    - pymdownx.details
+    - pymdownx.caret
+    - pymdownx.details
+    - pymdownx.inlinehilite
+    - pymdownx.magiclink
+    - pymdownx.smartsymbols
+    - pymdownx.superfences
+    - pymdownx.tabbed:
+          alternate_style: true
+    - tables
+    - admonition
+
+nav:
+    - 'Getting Started': index.md
+    - 'Why kbre?': why.md
+    - 'Installation': installation.md
+    - 'Usage': usage.md
+    - 'Configuration Dir Format': configDirFormat.md
+    - 'Releases': changelog.md

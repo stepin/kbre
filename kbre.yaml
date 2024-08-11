@@ -9,6 +9,7 @@ extensions:
     - yaml
     - files
     - mordant
+    - mkdocs
 variables:
   SONAR_HOST_URL: "http://localhost:9000"
   SONAR_PROJECT_KEY: kbre
