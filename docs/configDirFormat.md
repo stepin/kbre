@@ -11,7 +11,7 @@ Top-level folders are `presets`. It's like template when you create new project 
 Next, `type` should be selected. It's main template files. Default is `root`. It's for root project. There is
 idea that in some cases variations of main template files will be needed (with the same extensions).
 
-Files with extension `.jar` is considered binary files, and they will be copied without variables substitution.
+Files with extensions `.jar` and `.bat` are considered binary files, and they will be copied without variables substitution.
 All other files are considered template files and variable substitution will be done.
 
 ## Extension
@@ -25,7 +25,7 @@ Case is ignored, it will be uppercase as variable. Values of variable is content
 
 Please, note that `project` extension name is reserved for data from `kbre.yaml` file.
 
-Files with extension `.jar` is considered binary files, and they will be copied without variables substitution.
+Files with extensions `.jar` and `.bat` are considered binary files, and they will be copied without variables substitution.
 All other files are considered template files and variable substitution will be done.
 
 ## Variable

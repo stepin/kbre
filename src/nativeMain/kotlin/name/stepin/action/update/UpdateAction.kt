@@ -81,9 +81,20 @@ class UpdateAction {
         extensions: List<Extension>,
         variables: Map<String, String>,
     ): Map<String, String> {
-        return extensions.flatMap { it.variables.entries }.associate {
-            it.key to substituteVariables(it.value, variables)
-        }
+        return extensions.map { it.variables }
+            .fold(mutableMapOf()) { map, varsMap ->
+                varsMap.forEach {
+                    val k = it.key
+                    val v = substituteVariables(it.value, variables)
+                    map[k] =
+                        if (map.containsKey(k)) {
+                            map[k] + "\n" + v
+                        } else {
+                            v
+                        }
+                }
+                map
+            }
     }
 
     private fun prepareVariables(configuration: UpdateConfiguration): Map<String, String> {
@@ -128,7 +139,8 @@ class UpdateAction {
 
     private fun isBinary(): (Map.Entry<WriteTarget, Any>) -> Boolean =
         {
-            it.key.relativeFilename.endsWith(".jar")
+            it.key.relativeFilename.endsWith(".jar") ||
+                it.key.relativeFilename.endsWith(".bat")
         }
 
     private fun prepareLibsVersionsTemplate(

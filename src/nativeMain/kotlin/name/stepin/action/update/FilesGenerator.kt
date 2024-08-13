@@ -18,7 +18,7 @@ data class FilesGenerator(
     val variables: Map<String, String>,
 ) {
     companion object {
-        private val varRegEx = Regex("%[a-zA-Z0-9\\-_]*%")
+        private val varRegEx = Regex("%[A-Z0-9_]+%")
 
         fun substituteVariables(
             template: String,
@@ -32,7 +32,7 @@ data class FilesGenerator(
             }
 
             // replace undefined variables
-            content.replace(varRegEx, "")
+            content = content.replace(varRegEx, "")
 
             return content
         }

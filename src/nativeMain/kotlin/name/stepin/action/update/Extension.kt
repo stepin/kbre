@@ -14,7 +14,6 @@ data class Extension(
         private val reservedFiles =
             setOf(
                 "gradle/libs.versions.toml",
-                "vars",
             )
 
         fun loadExtension(
@@ -25,13 +24,17 @@ data class Extension(
             val path = extensionsPath / name
             val extra =
                 listRecursively(path)
-                    .filterKeys { !reservedFiles.contains(it.relativeFilename) }
+                    .filterKeys {
+                        !reservedFiles.contains(it.relativeFilename) && !it.relativeFilename.startsWith("vars/")
+                    }
                     .entries.associate { it.key to it.value }
 
             val newExtra =
                 if (new) {
                     listRecursively(extensionsPath / "$name-new")
-                        .filterKeys { !reservedFiles.contains(it.relativeFilename) }
+                        .filterKeys {
+                            !reservedFiles.contains(it.relativeFilename) && !it.relativeFilename.startsWith("vars/")
+                        }
                         .entries.associate { it.key to it.value }
                 } else {
                     emptyMap()
@@ -40,18 +43,28 @@ data class Extension(
             val libs = loadIfExists(path / "gradle/libs.versions.toml")
             val libsMap = if (libs.isNullOrEmpty()) emptyMap() else mapOf("LIBS" to libs)
 
-            val vars = listRecursively(extensionsPath / "vars")
-                .entries.mapNotNull {
-                    val filename = it.key.relativeFilename
+            val vars =
+                listRecursively(path / "vars")
+                    .entries.mapNotNull {
+                        val filename = it.key.relativeFilename
 
-                    val content = loadIfExists(path / filename)
-                        ?: return@mapNotNull null
+                        val content =
+                            loadIfExists(path / "vars" / filename)
+                                ?: return@mapNotNull null
 
-                    val varName = filename.substringBeforeLast(".").uppercase()
+                        val varName = filename.substringBeforeLast(".").uppercase()
 
-                    varName to content
-                }
-                .toMap()
+                        varName to content
+                    }
+                    .fold(mutableMapOf<String, String>()) { map, (k, v) ->
+                        map[k] =
+                            if (map.containsKey(k)) {
+                                map[k] + "\n" + v
+                            } else {
+                                v
+                            }
+                        map
+                    }
 
             return Extension(
                 name = name,
