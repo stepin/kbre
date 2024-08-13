@@ -62,4 +62,6 @@ nav:
     - 'Installation': installation.md
     - 'Usage': usage.md
     - 'Configuration Dir Format': configDirFormat.md
+    - 'Kbre.yaml File Format': kbreFileFormat.md
+    - 'Limitations': limitations.md
     - 'Releases': changelog.md
