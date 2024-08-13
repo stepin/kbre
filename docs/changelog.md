@@ -3,10 +3,12 @@
 
 ### Features
 
-- added docs site
+- (17786db) added `notes` param
+- (17786db) introduction of `vars` folder for extensions
+- (5c02aad) added docs site
+- (5ec6fbc) added generation of completion files for zsh, bash, and fish
 - (6e1613d) added init action
 - (2107d94) added about action
-- (5ec6fbc) added generation of completion files for zsh, bash, and fish
 
 ### Fixes
 
@@ -14,6 +16,7 @@
 
 ### Other
 
+- (17786db) chore: better docs
 - (5ecdc21) chore: clean-up, it’s not needed now
 - (ec09fd3) build: faster rebuild
 - (dc5ae33) refactor: move update action to dedicated package
