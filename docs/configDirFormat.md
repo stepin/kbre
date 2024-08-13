@@ -6,21 +6,33 @@ Top-level folders are `presets`. It's like template when you create new project 
 - `spring` for Kotlin web apps
 - `script` for Kotlin scripts
 
-Next, `type` should be selected. It's main template files. Default is `root`. It's for root project. If you have
-subprojects most probably you will need other type for it.
+## Type
 
-`Extension` is most powerful concept. First of all, you can just copy with replaced variables any files. There is also
-special meaning for following files:
+Next, `type` should be selected. It's main template files. Default is `root`. It's for root project. There is
+idea that in some cases variations of main template files will be needed (with the same extensions).
+
+Files with extension `.jar` is considered binary files, and they will be copied without variables substitution.
+All other files are considered template files and variable substitution will be done.
+
+## Extension
+
+`Extension` is a most interesting concept. First of all, you can just copy any files. Variables will be substituted.
+There is also special meaning for following files:
 
 - `gradle/libs.versions.toml` -- it will be merged with `gradle/libs.versions.toml` from `type`
-- `imports.kts` -- it will be added to `%IMPORTS%` variable
-- `plugins.kts` -- it will be added to `%PLUGINS%` variable
-- `deps.kts` -- it will be added to `%DEPS%` variable
-- `buildDeps.kts` -- it will be added to `%BUILD_DEPS%` variable (buildscript dependencies)
-- `body.kts` -- it will be added to `%BODY%` variable
+- `vars/vAr_NAME.EXTENSION` -- it will be added as `%VAR_NAME%` variable. Extension is ignored, it's for editors.
+Case is ignored, it will be uppercase as variable. Values of variable is content of files.
 
-`Variable` is key/value. They are defined in kbre.yaml file and there are some pre-defined variable. In addition
-to variables from extensions following variables are defined:
+Please, note that `project` extension name is reserved for data from `kbre.yaml` file.
+
+Files with extension `.jar` is considered binary files, and they will be copied without variables substitution.
+All other files are considered template files and variable substitution will be done.
+
+## Variable
+
+`Variable` is key/value. They are defined in kbre.yaml file, and in `vars` folders in extensions.
+
+Pre-defined variables from `kbre.yaml` file:
 
 - `%PRESET%` -- preset
 - `%TYPE%` -- type
@@ -28,3 +40,23 @@ to variables from extensions following variables are defined:
 - `%ARTIFACT%` -- in a lot of places used as binary name
 - `%NAME%` -- some human app name
 - `%DESCRIPTION%` -- human app description
+- `%NOTES%` -- instructions what to do after generation
+
+# kbre file format
+
+Internally, kbre.yaml provides `project` extension.
+
+Top-level keys:
+
+- group (string) -- artifact group like `com.example`
+- artifact (string) -- artifact id, used in many places, like `my-project`
+- name (optional, string) -- human-readable project name, defaults to artifact
+- description (optional, string) -- human-readable project description
+- preset (string) -- folder inside templates directory
+- type (string) -- folder inside preset directory
+- extensions (array of strings) -- folders inside preset/extensions directory
+- variables (optional, map of strings to strings) -- variables that will be used in templates or extensions
+- notes (optional, string) -- message that should be shown after successful `new` or `update` action
+
+All params in the file are optional but if param is not optional and it's missing in the file it should be defined
+using cli parameter.

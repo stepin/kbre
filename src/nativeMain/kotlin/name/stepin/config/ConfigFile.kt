@@ -16,12 +16,7 @@ data class ConfigFile(
     val preset: String? = null,
     val extensions: List<String> = emptyList(),
     val variables: Map<String, String> = emptyMap(),
-    val libs: String? = null,
-    val imports: String? = null,
-    val plugins: String? = null,
-    val deps: String? = null,
-    val buildDeps: String? = null,
-    val body: String? = null,
+    val notes: String? = null,
 ) {
     companion object {
         fun read(path: Path): ConfigFile {

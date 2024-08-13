@@ -1,6 +1,6 @@
 package name.stepin.action.update
 
-import name.stepin.action.update.FilesGenerator.Companion.getContent
+import name.stepin.action.update.FilesGenerator.Companion.substituteVariables
 import name.stepin.utils.FileUtils.listRecursively
 import name.stepin.utils.FileUtils.load
 import name.stepin.utils.Logger
@@ -51,6 +51,10 @@ class UpdateAction {
             copyFiles = copyFiles + newCopyFiles + extraCopyFiles,
             variables = variables,
         ).process()
+
+        if (!configuration.notes.isNullOrEmpty()) {
+            println(configuration.notes)
+        }
     }
 
     private fun prepareExtensions(
@@ -69,12 +73,7 @@ class UpdateAction {
     private fun projectExtension(configuration: UpdateConfiguration) =
         Extension(
             name = "project",
-            libs = configuration.libs,
-            imports = configuration.imports,
-            plugins = configuration.plugins,
-            deps = configuration.deps,
-            buildDeps = configuration.buildDeps,
-            body = configuration.body,
+            variables = configuration.variables,
             extra = emptyMap(),
         )
 
@@ -82,28 +81,9 @@ class UpdateAction {
         extensions: List<Extension>,
         variables: Map<String, String>,
     ): Map<String, String> {
-        return mapOf(
-            "BODY" to
-                extensions
-                    .filter { it.body != null }
-                    .joinToString(separator = "\n") { getContent(it.body ?: "", variables) },
-            "DEPS" to
-                extensions
-                    .filter { it.deps != null }
-                    .joinToString(separator = "\n") { getContent(it.deps ?: "", variables) },
-            "BUILD_DEPS" to
-                extensions
-                    .filter { it.deps != null }
-                    .joinToString(separator = "\n") { getContent(it.buildDeps ?: "", variables) },
-            "IMPORTS" to
-                extensions
-                    .filter { it.imports != null }
-                    .joinToString(separator = "\n") { getContent(it.imports ?: "", variables) },
-            "PLUGINS" to
-                extensions
-                    .filter { it.plugins != null }
-                    .joinToString(separator = "\n") { getContent(it.plugins ?: "", variables) },
-        )
+        return extensions.flatMap { it.variables.entries }.associate {
+            it.key to substituteVariables(it.value, variables)
+        }
     }
 
     private fun prepareVariables(configuration: UpdateConfiguration): Map<String, String> {
@@ -115,6 +95,7 @@ class UpdateAction {
                 "PRESET" to configuration.preset,
                 "TYPE" to configuration.type,
                 "DESCRIPTION" to (configuration.description ?: ""),
+                "NOTES" to (configuration.notes ?: ""),
             )
     }
 
@@ -156,7 +137,7 @@ class UpdateAction {
     ): Map<WriteTarget, String> {
         val libsVersionsPath = "gradle/libs.versions.toml"
         val tomlFromTemplate = templateFiles.entries.find { it.key.relativeFilename == libsVersionsPath }
-        val libsVersionsTomls = listOfNotNull(tomlFromTemplate?.value) + extensions.mapNotNull { it.libs }
+        val libsVersionsTomls = listOfNotNull(tomlFromTemplate?.value) + extensions.mapNotNull { it.variables["LIBS"] }
         val libsVersionsToml = TomlFile.combineFiles(libsVersionsTomls)
         if (libsVersionsToml.isEmpty()) return emptyMap()
         return mapOf(

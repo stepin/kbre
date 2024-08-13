@@ -73,32 +73,9 @@ class InitCmd :
         "--variable",
         help = "Project-specific variables",
     ).multiple()
-    private val libs by option(
-        "--libs",
-        help = "Project-specific libs (libs.versions.toml file format)",
-    )
-    private val imports by option(
-        "-i",
-        "--imports",
-        help = "Project-specific imports",
-    )
-    private val plugins by option(
-        "--plugins",
-        help = "Project-specific plugins",
-    )
-    private val deps by option(
-        "-d",
-        "--deps",
-        help = "Project-specific deps",
-    )
-    private val buildDeps by option(
-        "--build-deps",
-        help = "Project-specific buildscript deps",
-    )
-    private val body by option(
-        "-b",
-        "--body",
-        help = "Project-specific body",
+    private val notes by option(
+        "--notes",
+        help = "Notes to show after generation",
     )
 
     override fun run() {
@@ -133,12 +110,7 @@ class InitCmd :
                 type = type ?: file?.type,
                 extensions = extensions + (file?.extensions ?: emptyList()),
                 variables = variablesMap + (file?.variables ?: emptyMap()),
-                libs = libs ?: file?.libs,
-                imports = imports ?: file?.imports,
-                plugins = plugins ?: file?.plugins,
-                deps = deps ?: file?.deps,
-                buildDeps = buildDeps,
-                body = body ?: file?.body,
+                notes = notes ?: file?.notes,
                 verbose = globalOptions.verbose,
             )
 

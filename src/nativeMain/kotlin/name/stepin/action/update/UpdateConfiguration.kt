@@ -14,11 +14,6 @@ data class UpdateConfiguration(
     val type: String,
     val extensions: List<String>,
     val variables: Map<String, String>,
-    val libs: String?,
-    val imports: String?,
-    val plugins: String?,
-    val deps: String?,
-    val buildDeps: String?,
-    val body: String?,
+    val notes: String?,
     val verbose: Boolean,
 )

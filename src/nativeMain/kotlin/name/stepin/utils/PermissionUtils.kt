@@ -11,7 +11,7 @@ import platform.posix.mode_t
 import platform.posix.stat
 
 /**
- * okio doesn't support permissions. So, work with POSIX permissions here.
+ * Okio doesn't support permissions. So, work with POSIX permissions here.
  */
 object PermissionUtils {
     const val MOD_644: UShort = 33188u

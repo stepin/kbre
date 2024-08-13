@@ -77,14 +77,10 @@ object FileUtils {
         }
     }
 
-    fun loadIfExists(
-        path: Path,
-        filename: String,
-    ): String? {
-        val filepath = path / filename
-        log("loadIfExists $filepath")
-        val exists = FileSystem.SYSTEM.exists(filepath)
+    fun loadIfExists(path: Path): String? {
+        log("loadIfExists $path")
+        val exists = FileSystem.SYSTEM.exists(path)
         if (!exists) return null
-        return load(filepath)
+        return load(path)
     }
 }

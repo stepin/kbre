@@ -12,6 +12,7 @@ import name.stepin.config.ConfigFile
 import name.stepin.utils.FileUtils.checkIfExists
 import name.stepin.utils.FileUtils.workingDir
 import name.stepin.utils.Logger.log
+import name.stepin.utils.MapUtils.uppercaseKeys
 import name.stepin.utils.System
 import okio.Path.Companion.toPath
 
@@ -78,32 +79,9 @@ class UpdateCmd :
         "--variable",
         help = "Project-specific variables",
     ).multiple()
-    private val libs by option(
-        "--libs",
-        help = "Project-specific libs (libs.versions.toml file format)",
-    )
-    private val imports by option(
-        "-i",
-        "--imports",
-        help = "Project-specific imports",
-    )
-    private val plugins by option(
-        "--plugins",
-        help = "Project-specific plugins",
-    )
-    private val deps by option(
-        "-d",
-        "--deps",
-        help = "Project-specific deps",
-    )
-    private val buildDeps by option(
-        "--build-deps",
-        help = "Project-specific buildscript deps",
-    )
-    private val body by option(
-        "-b",
-        "--body",
-        help = "Project-specific body",
+    private val notes by option(
+        "--notes",
+        help = "Notes to show after generation",
     )
 
     override fun run() {
@@ -135,13 +113,8 @@ class UpdateCmd :
                     preset = preset ?: file.preset ?: throw RuntimeException("preset should be specified"),
                     type = type ?: file.type ?: throw RuntimeException("type should be specified"),
                     extensions = extensions + file.extensions,
-                    variables = variablesMap + file.variables,
-                    libs = libs ?: file.libs,
-                    imports = imports ?: file.imports,
-                    plugins = plugins ?: file.plugins,
-                    deps = deps ?: file.deps,
-                    buildDeps = buildDeps ?: file.buildDeps,
-                    body = body ?: file.body,
+                    variables = (variablesMap + file.variables).uppercaseKeys(),
+                    notes = notes ?: file.notes,
                     verbose = globalOptions.verbose,
                 )
             } else {
@@ -156,13 +129,8 @@ class UpdateCmd :
                     preset = preset ?: throw RuntimeException("preset should be specified"),
                     type = type ?: throw RuntimeException("type should be specified"),
                     extensions = extensions,
-                    variables = variablesMap,
-                    libs = libs,
-                    imports = imports,
-                    plugins = plugins,
-                    deps = deps,
-                    buildDeps = buildDeps,
-                    body = body,
+                    variables = variablesMap.uppercaseKeys(),
+                    notes = notes,
                     verbose = globalOptions.verbose,
                 )
             }

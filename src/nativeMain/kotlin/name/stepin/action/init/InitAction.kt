@@ -93,12 +93,7 @@ class InitAction {
                 preset,
                 extensions,
                 variables,
-                cmd.libs,
-                cmd.imports,
-                cmd.plugins,
-                cmd.deps,
-                cmd.buildDeps,
-                cmd.body,
+                cmd.notes,
             )
 
         t.println()

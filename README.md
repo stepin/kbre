@@ -14,9 +14,12 @@ Feel free to file bug reports. If I will be able to reproduce it I will fix it.
 About new features: it's better to send PRs, not just ideas (as I already have ideas but limited time).
 
 Some ideas:
-- recheck how it should work with subprojects (like added one more special case for `libs.versions.toml`)
+- add yaml files merge (for `application.yml` cases: to compose it from different sources)
 - add variables to the path / filenames -- it should be easy, but it looks unnecessary
-- create krbe.yaml file on `krbe new` command?
+- add `vars.yaml` for types and extensions as addition to `vars` folder for short values cases?
+- allow to update list of extensions during next runs of init command (requires changes in mordant library to specify
+initially selected values)
+- create/update `krbe.yaml` file on `krbe new` command?
 - add web version?
 
 ## License

@@ -18,14 +18,22 @@ data class FilesGenerator(
     val variables: Map<String, String>,
 ) {
     companion object {
-        fun getContent(
+        private val varRegEx = Regex("%[a-zA-Z0-9\\-_]*%")
+
+        fun substituteVariables(
             template: String,
             variables: Map<String, String>,
         ): String {
             var content = template
+
+            // replace defined variables
             variables.entries.forEach {
                 content = content.replace("%${it.key}%", it.value)
             }
+
+            // replace undefined variables
+            content.replace(varRegEx, "")
+
             return content
         }
     }
@@ -52,7 +60,7 @@ data class FilesGenerator(
         templateFiles.entries.forEach {
             val target = targetFolder / it.key.relativeFilename
             log("generating $target")
-            val content = getContent(it.value, variables)
+            val content = substituteVariables(it.value, variables)
             createBaseFolder(target)
             write(target, content)
             setPermissions(target, it.key.permissions)

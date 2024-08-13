@@ -9,24 +9,24 @@ variables:
   SONAR_PROJECT_KEY: kbre
   SONAR_PROJECT_NAME: kbre
   SONAR_TOKEN: sqp_821b1d3209761625bdd29259674237d429bce626
-libs: |
-    [versions]
-    kotlinxSerialization = "2.0.0"
-    yamlkt = "0.13.0"
-    okio = "3.9.0"
+  libs: |
+      [versions]
+      kotlinxSerialization = "2.0.0"
+      yamlkt = "0.13.0"
+      okio = "3.9.0"
 
-    [libraries]
-    yamlkt = { module = "net.mamoe.yamlkt:yamlkt", version.ref = "yamlkt" }
-    okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
+      [libraries]
+      yamlkt = { module = "net.mamoe.yamlkt:yamlkt", version.ref = "yamlkt" }
+      okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
 
-    [plugins]
-    kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinxSerialization" }
-imports: |
-    // custom imports, if needed for body
-plugins: |
-    alias(libs.plugins.kotlinx.serialization)
-deps: |
-    commonMainImplementation(libs.yamlkt)
-    commonMainImplementation(libs.okio)
-body: |
-    // any text
+      [plugins]
+      kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinxSerialization" }
+  imports: |
+      // custom imports, if needed for body
+  plugins: |
+      alias(libs.plugins.kotlinx.serialization)
+  deps: |
+      commonMainImplementation(libs.yamlkt)
+      commonMainImplementation(libs.okio)
+  body: |
+      // any text
