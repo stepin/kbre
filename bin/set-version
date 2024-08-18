@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -eEuo pipefail
+cd "$(dirname "$0")"
+
+cd ..
+
+cp build.gradle.kts build.gradle.kts.orig
+sed "s/1.0-SNAPSHOT/$VERSION/g" build.gradle.kts.orig > build.gradle.kts
+
+cp src/nativeMain/kotlin/name/stepin/cli/VersionCmd.kt src/nativeMain/kotlin/name/stepin/cli/VersionCmd.kt.orig
+sed "s/SNAPSHOT/$VERSION/g" src/nativeMain/kotlin/name/stepin/cli/VersionCmd.kt.orig > src/nativeMain/kotlin/name/stepin/cli/VersionCmd.kt
