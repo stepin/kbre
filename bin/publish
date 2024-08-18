@@ -8,6 +8,7 @@ VERSION=$(git describe --tags --always)
 IMAGE_LATEST="stepin/kbre"
 IMAGE="$IMAGE_LATEST:$VERSION"
 
+export VERSION
 ./bin/set-version
 
 ./gradlew build
