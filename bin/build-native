@@ -6,8 +6,8 @@ cd ..
 
 unameOut="$(uname -s)"
 case "${unameOut}" in
-    Linux*)     os=linux;;
-    Darwin*)    os=macos;;
+    Linux*)     os=linux;osUpperCase=Linux;;
+    Darwin*)    os=macos;osUpperCase=Macos;;
     *)          echo "OS is not supported:${unameOut}"; exit 1
 esac
 
@@ -18,7 +18,7 @@ case "${arch}" in
     *)          echo "Arch is not supported:${arch}"; exit 1
 esac
 
-[[ ! -e "build/bin/${os}${suffix}/releaseExecutable/kbre.kexe" ]] && ./gradlew "linkReleaseExecutable${os^}${suffix}"
+[[ ! -e "build/bin/${os}${suffix}/releaseExecutable/kbre.kexe" ]] && ./gradlew "linkReleaseExecutable${osUpperCase}${suffix}"
 
 mkdir -p build/bin/native/releaseExecutable
 cp "build/bin/${os}${suffix}/releaseExecutable/kbre.kexe" build/bin/native/releaseExecutable/kbre
