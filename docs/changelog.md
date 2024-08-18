@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.2.2 ^19.08.2024^
+
+### Other
+
+- (20af3be) build: extract set-version script for homebrew
+
+## 1.2.1 ^18.08.2024^
+
+### Other
+
+- (ad834e3) build: fix build on clean macOS (for CICD)
+
 ## 1.2.0 ^14.08.2024^
 
 ### Features
